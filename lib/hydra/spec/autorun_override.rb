@@ -1,12 +1,7 @@
-if defined?(Spec)
-  module Spec
-    module Runner
-      class << self
-        # stop the auto-run at_exit
-        def run
-          return 0
-        end 
-      end
+if defined?(Rspec)
+  Rspec::Core::Runner.class_eval do
+    def self.autorun
+      nil
     end
   end
 end

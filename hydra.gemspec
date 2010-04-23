@@ -49,6 +49,7 @@ Gem::Specification.new do |s|
      "lib/hydra/safe_fork.rb",
      "lib/hydra/spec/autorun_override.rb",
      "lib/hydra/spec/hydra_formatter.rb",
+     "lib/hydra/spec/hydra_runner.rb",
      "lib/hydra/ssh.rb",
      "lib/hydra/stdio.rb",
      "lib/hydra/sync.rb",

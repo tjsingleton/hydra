@@ -103,38 +103,33 @@ module Hydra #:nodoc:
       return output.join("\n")
     end
 
-    # run all the Specs in an RSpec file (NOT IMPLEMENTED)
+    # run all the Specs in an RSpec file
     def run_rspec_file(file)
       # pull in rspec
       begin
-        require 'spec'
-        require 'hydra/spec/hydra_formatter'
+        require 'rspec/rails'
         # Ensure we override rspec's at_exit
         require 'hydra/spec/autorun_override'
+        require 'hydra/spec/hydra_formatter'
+        require 'hydra/spec/hydra_runner'
       rescue LoadError => ex
         return ex.to_s
       end
-      hydra_output = StringIO.new
-      Spec::Runner.options.instance_variable_set(:@formatters, [
-        Spec::Runner::Formatter::HydraFormatter.new(
-          Spec::Runner.options.formatter_options,
-          hydra_output
-        )
-      ])
-      Spec::Runner.options.instance_variable_set(
-        :@example_groups, []
-      )
-      Spec::Runner.options.instance_variable_set(
-        :@files, [file]
-      )
-      Spec::Runner.options.instance_variable_set(
-        :@files_loaded, false
-      )
-      Spec::Runner.options.run_examples
-      hydra_output.rewind
-      output = hydra_output.read.chomp
-      output = "" if output.gsub("\n","") =~ /^\.*$/
 
+      # reset Rspec environment
+      Rspec::Core.instance_variable_set(:@world, nil)
+      Rspec::Core.instance_variable_set(:@configuration, nil)
+
+      # run file
+      runner = Rspec::Core::HydraRunner.new
+      runner.run([file])
+
+      # grab errors
+      runner.reporter.output.reopen('')
+      runner.reporter.dump_failures
+      output = runner.reporter.output.string
+      # \A to \Z matches beginning and end of string instead of each line
+      output = '' if /\A(\000|\n)+\Z/.match(output)
       return output
     end
 

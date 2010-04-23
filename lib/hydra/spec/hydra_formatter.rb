@@ -1,14 +1,17 @@
-require 'spec/runner/formatter/progress_bar_formatter'
-module Spec
-  module Runner
-    module Formatter
-      class HydraFormatter < ProgressBarFormatter
+module Rspec
+  module Core
+    module Formatters
+      class HydraFormatter < ProgressFormatter
         # Stifle the post-test summary
-        def dump_summary(duration, example, failure, pending)
+        def dump_summary
         end
 
         # Stifle the output of pending examples
         def example_pending(*args)
+        end
+
+        def output
+          @output ||= StringIO.new
         end
       end
     end
