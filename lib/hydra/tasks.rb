@@ -190,7 +190,7 @@ WARNING: RAILS_ENV is "development". Make sure to set it properly (ex: "RAILS_EN
   #
   #   Hydra::SyncTask.new('hydra:sync') do |t|
   #     t.verbose = false # optionally set to true for lots of debug messages
-  #   end  
+  #   end
   class SyncTask < Hydra::Task
 
     # Create a new SyncTestTask
@@ -261,7 +261,7 @@ WARNING: RAILS_ENV is "development". Make sure to set it properly (ex: "RAILS_EN
               else
                 "==== #{@name} failed on #{worker['connect']} ====\nPlease see above for more details.\n"
               end
-            rescue 
+            rescue
               @results[worker] = "==== #{@name} failed for #{worker['connect']} ====\n#{$!.inspect}\n#{$!.backtrace.join("\n")}"
             end
           end
