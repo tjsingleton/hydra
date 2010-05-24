@@ -116,12 +116,12 @@ module Hydra #:nodoc:
         return ex.to_s
       end
 
-      # reset Rspec environment
-      Rspec::Core.instance_variable_set(:@world, nil)
-      Rspec::Core.instance_variable_set(:@configuration, nil)
+      # reset RSpec environment
+      RSpec::Core.instance_variable_set(:@world, nil)
+      RSpec::Core.instance_variable_set(:@configuration, nil)
 
       # run file
-      runner = Rspec::Core::HydraRunner.new
+      runner = RSpec::Core::HydraRunner.new
       runner.run([file])
 
       # grab errors

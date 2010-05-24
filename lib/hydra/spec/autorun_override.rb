@@ -1,5 +1,5 @@
-if defined?(Rspec)
-  Rspec::Core::Runner.class_eval do
+if defined?(RSpec)
+  RSpec::Core::Runner.class_eval do
     def self.autorun
       nil
     end

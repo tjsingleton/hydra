@@ -1,4 +1,4 @@
-module Rspec
+module RSpec
   module Core
     module Formatters
       class HydraFormatter < ProgressFormatter
@@ -17,4 +17,3 @@ module Rspec
     end
   end
 end
-

@@ -1,5 +1,5 @@
-if defined?(Rspec)
-  module Rspec
+if defined?(RSpec)
+  module RSpec
     module Core
       class HydraRunner < Runner
         def self.autorun
@@ -7,7 +7,7 @@ if defined?(Rspec)
         end
 
         def reporter
-          @reporter ||= Rspec::Core::Formatters::HydraFormatter.new
+          @reporter ||= RSpec::Core::Formatters::HydraFormatter.new
         end
       end
     end
